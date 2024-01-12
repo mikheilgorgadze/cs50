@@ -6,9 +6,6 @@
 #include <stdbool.h>
 
 
-#define PIXELS_FOR_CORNER 4
-#define PIXELS_FOR_EDGES 6
-#define PIXELS_FOR_MIDDLE 9
 
 typedef enum Position{
     TOP_LEFT,
