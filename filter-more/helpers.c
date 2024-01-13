@@ -237,6 +237,7 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 // Detect edges
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
+    RGBTRIPLE temp[height][width];
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
 
@@ -244,36 +245,162 @@ void edges(int height, int width, RGBTRIPLE image[height][width])
             BYTE greens_arr[9];
             BYTE blues_arr[9];
 
+
+            int red = 0;
+            int green = 0;
+            int blue = 0;
             
             int i = 0;
-            for (int m = y - 1; m <= y + 1; m++){
-                for (int n = x - 1; n <= x + 1; n++){
-                    if (m >= 0 && m < height && n >= 0 && n < width){
-                        reds_arr[i] = image[m][n].rgbtRed;
-                        greens_arr[i] = image[m][n].rgbtGreen;
-                        blues_arr[i] = image[m][n].rgbtBlue;
+            if (y == 0 && x == 0) {
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m < y ||  n < x) ? 0 : image[m][n].rgbtRed;
+                        green = (m < y ||  n < x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m < y ||  n < x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
                         i++;
-                    } else {
-                        reds_arr[i] = 0;
-                        greens_arr[i] = 0;
-                        blues_arr[i] = 0;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
                     }
-                    //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                }
+            } else if (y == 0 && x == width - 1) {
+
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m < y ||  n > x) ? 0 : image[m][n].rgbtRed;
+                        green = (m < y ||  n > x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m < y ||  n > x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+
+            } else if (y == height - 1 && x == 0) {
+
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m > y ||  n < x) ? 0 : image[m][n].rgbtRed;
+                        green = (m > y ||  n < x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m > y ||  n < x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+
+            } else if (y == height - 1 && x == width - 1 ) {
+
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m > y ||  n > x) ? 0 : image[m][n].rgbtRed;
+                        green = (m > y ||  n > x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m > y ||  n > x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+            } else if ((y > 0 && y < height - 1) && (x == 0)) {
+                
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (n < x) ? 0 : image[m][n].rgbtRed;
+                        green = (n < x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (n < x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+
+            }else if ((y > 0 && y < height - 1) && (x == width - 1)) {
+                
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (n > x) ? 0 : image[m][n].rgbtRed;
+                        green = (n > x) ? 0 : image[m][n].rgbtGreen;
+                        blue = (n > x) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+
+            }else if ((y == 0) && (x > 0 && x < width - 1)) {
+                
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m < y) ? 0 : image[m][n].rgbtRed;
+                        green = (m < y) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m < y) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+
+            }else if ((y == height - 1) && (x > 0 && x < width - 1)) {
+                
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = (m > y) ? 0 : image[m][n].rgbtRed;
+                        green = (m > y) ? 0 : image[m][n].rgbtGreen;
+                        blue = (m > y) ? 0 : image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
+                }
+            }else {
+                
+                for (int m = y - 1; m <= y + 1; m++){
+                    for (int n = x - 1; n <= x + 1; n++){
+                        red = image[m][n].rgbtRed;
+                        green = image[m][n].rgbtGreen;
+                        blue = image[m][n].rgbtBlue;
+                        reds_arr[i] = red;
+                        greens_arr[i] = green;
+                        blues_arr[i] = blue;
+                        i++;
+                        //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                    }
                 }
             }
-
-
-            
             //calculate weightet sum
             int weighted_sum_reds = weighted_sum(ARR_SIZE, reds_arr);
             int weighted_sum_greens = weighted_sum(ARR_SIZE, greens_arr);
             int weighted_sum_blues = weighted_sum(ARR_SIZE, blues_arr);
             
-            image[y][x].rgbtRed = weighted_sum_reds;
-            image[y][x].rgbtGreen = weighted_sum_greens;
-            image[y][x].rgbtBlue = weighted_sum_blues;
+            temp[y][x].rgbtRed = weighted_sum_reds;
+            temp[y][x].rgbtGreen = weighted_sum_greens;
+            temp[y][x].rgbtBlue = weighted_sum_blues;
         }
+
     }
+
+    for (int row = 0; row < height; row++) {
+        for (int col = 0; col < width; col++) {
+            image[row][col] = temp[row][col];
+        }
+
+    }
+
     return;
 }
 
@@ -285,7 +412,6 @@ unsigned int pixel_to_hex(RGBTRIPLE pixel) {
     BYTE green = pixel.rgbtGreen;
     BYTE blue = pixel.rgbtBlue;
     
-    printf("(%i, %i, %i)\n", red, green, blue);
     return (red << 16) | (green << 8) | blue;
 
 }
@@ -371,6 +497,6 @@ int weighted_sum(int array_size, BYTE color_arr[array_size]){
     float sqrt_value = sqrt(pwr_sum_Gx + pwr_sum_Gy);
     int final_value = (round(sqrt_value) > 255) ? 255 : round(sqrt_value);
 
-
+ 
     return final_value;
 }
