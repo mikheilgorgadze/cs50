@@ -6,6 +6,8 @@
 #include <stdbool.h>
 
 
+#define ARR_SIZE 9
+#define KERNEL_SIZE 9
 
 typedef enum Position{
     TOP_LEFT,
@@ -25,9 +27,12 @@ typedef struct PixelInfo{
 }  PixelInfo;
 
 
+
+int weighted_sum(int array_size, BYTE colors_arr[array_size]);
 unsigned int avg_pixels(unsigned int *colors, int color_count); 
 unsigned int pixel_to_hex(RGBTRIPLE pixel); 
 PixelInfo get_pixel_info(int x_pos, int y_pos, int height, int width);
+
 
 // Convert image to grayscale
 void grayscale(int height, int width, RGBTRIPLE image[height][width])
@@ -233,11 +238,41 @@ void blur(int height, int width, RGBTRIPLE image[height][width])
 void edges(int height, int width, RGBTRIPLE image[height][width])
 {
     for (int y = 0; y < height; y++) {
-        for (int x = 0; x < height; x++) {
+        for (int x = 0; x < width; x++) {
+
+            BYTE reds_arr[9];
+            BYTE greens_arr[9];
+            BYTE blues_arr[9];
 
             
-        }
+            int i = 0;
+            for (int m = y - 1; m <= y + 1; m++){
+                for (int n = x - 1; n <= x + 1; n++){
+                    if (m >= 0 && m < height && n >= 0 && n < width){
+                        reds_arr[i] = image[m][n].rgbtRed;
+                        greens_arr[i] = image[m][n].rgbtGreen;
+                        blues_arr[i] = image[m][n].rgbtBlue;
+                        i++;
+                    } else {
+                        reds_arr[i] = 0;
+                        greens_arr[i] = 0;
+                        blues_arr[i] = 0;
+                    }
+                    //printf("Top corner's neighbour pixels are - (%i, %i, %i)\n", red, green, blue);
+                }
+            }
 
+
+            
+            //calculate weightet sum
+            int weighted_sum_reds = weighted_sum(ARR_SIZE, reds_arr);
+            int weighted_sum_greens = weighted_sum(ARR_SIZE, greens_arr);
+            int weighted_sum_blues = weighted_sum(ARR_SIZE, blues_arr);
+            
+            image[y][x].rgbtRed = weighted_sum_reds;
+            image[y][x].rgbtGreen = weighted_sum_greens;
+            image[y][x].rgbtBlue = weighted_sum_blues;
+        }
     }
     return;
 }
@@ -249,7 +284,8 @@ unsigned int pixel_to_hex(RGBTRIPLE pixel) {
     BYTE red = pixel.rgbtRed;
     BYTE green = pixel.rgbtGreen;
     BYTE blue = pixel.rgbtBlue;
-
+    
+    printf("(%i, %i, %i)\n", red, green, blue);
     return (red << 16) | (green << 8) | blue;
 
 }
@@ -314,4 +350,27 @@ PixelInfo get_pixel_info(int x_pos, int y_pos, int height, int width) {
 
 
     return corner;
+}
+
+
+
+int weighted_sum(int array_size, BYTE color_arr[array_size]){
+    int kernel_Gx[KERNEL_SIZE] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
+    int kernel_Gy[KERNEL_SIZE] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
+
+    float sum_Gx = 0.0;
+    float sum_Gy = 0.0;
+
+    for (int i = 0; i < array_size; i++) {
+        sum_Gx += kernel_Gx[i] * color_arr[i];
+        sum_Gy += kernel_Gy[i] * color_arr[i];
+    }
+   
+    int pwr_sum_Gx = pow(sum_Gx, 2);
+    int pwr_sum_Gy = pow(sum_Gy, 2);
+    float sqrt_value = sqrt(pwr_sum_Gx + pwr_sum_Gy);
+    int final_value = (round(sqrt_value) > 255) ? 255 : round(sqrt_value);
+
+
+    return final_value;
 }
