@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
 #include "bmp.h"
 
 int main(int argc, char *argv[])
@@ -52,7 +52,11 @@ int main(int argc, char *argv[])
         printf("Unsupported file format.\n");
         return 4;
     }
+
+//    LONG temp;
     
+    bi.biHeight =sqrt(bi.biHeight * bi.biHeight);
+
     // Write outfile's BITMAPFILEHEADER
     fwrite(&bf, sizeof(BITMAPFILEHEADER), 1, outptr);
 
