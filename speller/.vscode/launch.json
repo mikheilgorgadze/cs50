@@ -9,7 +9,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/speller",
-            "args": ["dictionaries/large", "texts/birdman.txt"],
+            "args": ["dictionaries/small", "texts/test.txt"],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [],

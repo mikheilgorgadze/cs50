@@ -1,0 +1,27 @@
+bool check(const char *word) {
+    // TODO
+    char *search_word = (char *)(malloc(sizeof(LENGTH + 1)));
+    strcpy(search_word, word);
+    int index = hash(search_word);
+    if (table[index] == NULL) {
+        return search_linked_list(table[index], search_word);
+    }
+    return true;
+}
+
+unsigned int hash(const char *word) {
+    // TODO: Improve this hash function
+    return (toupper(word[0]) - 'A') % N;
+}
+
+
+unsigned int hash(const char *word) {
+    // TODO: Improve this hash function
+    int length = strlen(word);
+    unsigned int hash_val = 0;
+    for (int i = 0; i < length; i++) {
+        hash_val += word[i];
+        hash_val = (hash_val * word[i]) % N;
+    }
+    return hash_val;
+}
