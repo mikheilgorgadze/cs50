@@ -1,6 +1,6 @@
-s = input("Do you agree? ")
+s = input("Do you agree? ").lower()
 
-if s.lower() in ["y", "yes"]:
+if s in ["y", "yes"]:
     print("Agreed.")
-elif s.lower() in ["n", "no"]:
+elif s in ["n", "no"]:
     print("Not Agreed.")
