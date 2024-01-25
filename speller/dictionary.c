@@ -10,7 +10,7 @@
 #include <strings.h>
 
 // TODO: Choose number of buckets in hash table
-#define N 2600
+const int N = 143091;
 
 // Represents a node in a hash table
 typedef struct node {
@@ -46,6 +46,7 @@ void init_table() {
 }
 
 // Inserts nodes into hash table
+int count = 0;
 bool insert_into_table(node *n) {
     if (n == NULL)
         return false;
@@ -55,6 +56,7 @@ bool insert_into_table(node *n) {
         n->next = table[index];
     }
 
+    count++;
     table[index] = n;
     return true;
 }
@@ -62,10 +64,10 @@ bool insert_into_table(node *n) {
 // Prints table structure
 void print_table() {
     for (int i = 0; i < N; i++) {
-        if (table[i] == NULL) {
-            printf("\t%i\t----\n", i);
-        } else {
+        if (table[i] != NULL) {
             printf("\t%i\t%s\n", i, table[i]->word);
+        } else {
+            printf("\t%i\t----\n", i);
         }
     }
 }
@@ -76,7 +78,7 @@ bool check(const char *word) {
     int index = hash(word);
     if (table[index] == NULL) {
         return false;
-    } else if (table[index]->next != NULL) {
+    } else /*if (table[index]->next != NULL)*/ {
         return search_linked_list(table[index], word);
     }
     return true;
@@ -88,8 +90,8 @@ unsigned int hash(const char *word) {
     int length = strlen(word);
     unsigned int hash_val = 0;
     for (int i = 0; i < length; i++) {
-        hash_val += word[i];
-        hash_val = (hash_val * word[i]) % N;
+        hash_val += tolower(word[i]);
+        hash_val = (hash_val * tolower(word[i])) % N;
     }
     return hash_val;
 }
@@ -117,16 +119,15 @@ bool load(const char *dictionary) {
         insert_into_table(word_node);
     };
 
-    print_table();
+    // print_table();
     fclose(source);
     return true;
 }
 
 // Returns number of words in dictionary if loaded, else 0 if not yet loaded
 unsigned int size(void) {
-    // TODO'
-
-    return 0;
+    // TODO
+    return count;
 }
 
 // Unloads dictionary from memory, returning true if successful, else false
