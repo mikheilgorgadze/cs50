@@ -1,0 +1,6 @@
+1.Aura of the person with 100 songs in songs.db might be Purple. Because of their relatively
+  high energy and danceability and low valence
+2.There are only three factors to calculate aura with current algorithm and I think it is low.
+  In addition, we may calculate different levels of energy, valence and danceability and measure
+  which kind of levels of these aura factors were more frequent in songs. This might give us more clear
+  picture.
