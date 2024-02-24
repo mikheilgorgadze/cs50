@@ -1,0 +1,226 @@
+:root {
+    --body-bg: hsl(218, 60%, 21%);
+    --nav-bg: #EEEEEE;
+    --secondary-color: #FC6736;
+    --third-color: rgb(57, 62, 70);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: system-ui;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    font-size: 1.25rem;
+    background: var(--body-bg);
+    color: var(--secondary-color);
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    gap: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    cursor: url("assets/default.cur"), default;
+}
+
+a:hover, button:hover, .card-body a:hover {
+    cursor: url("assets/pointer.cur"), pointer;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    max-height: 100svh;
+    background-color: var(--nav-bg);
+    background-blend-mode: normal;
+    width: 15vw;
+}
+
+
+.nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 4rem;
+    font-size: 1rem;
+    padding-block: 3rem;
+}
+
+.nav-list a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.nav-list li {
+    padding: 1rem 2rem;
+    margin-left: 2rem;
+    border-radius: 100vw 0 0 100vw;
+}
+
+.nav-list li.active {
+    background: var(--body-bg);
+    position: relative;
+}
+
+.nav-list li.active::before,
+.nav-list li.active::after {
+    --border-radius: 1rem;
+    content: '';
+    position: absolute;
+    width: var(--border-radius);
+    height: var(--border-radius);
+    right: 0;
+}
+
+.nav-list li.active::before {
+    top: calc(var(--border-radius) * -1);
+    border-radius: 0 0 100vw 0;
+    box-shadow: 10px 10px 0 10px var(--body-bg);
+}
+
+.nav-list li.active::after {
+    bottom: calc(var(--border-radius) * -1);
+    border-radius: 0 100vw 0 0;
+    box-shadow: 10px -10px 0 10px var(--body-bg);
+}
+
+/* Bootstrap styles*/
+.bg-gray-700 {
+    background-color: #4a5056;
+}
+
+svg {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: -.125rem;
+    margin-right: 0.250rem;
+}
+
+.page-title {
+    text-align: center;
+    background-color: #EEEEEE;
+    max-width: 800px;
+    min-width: 250px;
+    padding: 10px;
+    border-radius: .5rem;
+    margin: 10vh auto auto;
+    border: 2px solid black;
+    color: var(--body-bg);
+
+}
+
+.home-page-title {
+    text-align: center;
+    background-color: #EEEEEE;
+    max-width: 800px;
+    min-width: 250px;
+    padding: 10px;
+    border-radius: .5rem;
+    margin: 10vh auto auto;
+    border: 2px solid black;
+    color: var(--body-bg);
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.btn {
+    background: var(--nav-bg);
+    color: var(--body-bg);
+}
+
+.card {
+    margin: 10rem auto auto;
+}
+
+.card #modal-button {
+    bottom: 1rem;
+    right: 1rem;
+}
+
+
+.blog-container {
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 50vw;
+    max-height: 200px;
+    overflow: hidden;
+    margin-top: 5rem;
+    background-color: var(--secondary-color);
+    color: #EEEEEE;
+    border: 1px solid #EEEEEE;
+}
+
+.blog-body {
+    border-top: 2px solid var(--body-bg);
+    padding-bottom: 10px;
+}
+
+.see-more {
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 2rem;
+    top: 2rem;
+    cursor: url("assets/pointer.cur"), pointer;
+}
+
+#pink-floyd {
+    background-image: url("assets/pinkfloyd.png");
+}
+
+#metallica {
+    background-image: url("assets/metallica.png");
+}
+
+#queen {
+    background-image: url("assets/queen.jpg");
+}
+
+#black-sabbath {
+    background-image: url("assets/black_sabbath.jpg");
+    color: black;
+    border: 1px solid black;
+}
+
+
+.page-nav {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20vw;
+    padding: 20px;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: 20vh;
+}
+
+.card {
+    color: var(--body-bg);
+    border: 2px solid black;
+    min-height: 300px;
+    min-width: 300px;
+}
+
+.home-btn {
+    background-color: var(--body-bg);
+    color: white;
+    margin-top: 50px;
+}
+
+.home-btn:hover {
+    background-color: var(--secondary-color)
+}
+
+.home-card-text {
+    margin-top: 2rem;
+}
+
+#blog-icon, #about-icon {
+    width: 2rem;
+    height: 2rem;
+    margin-top: 1rem;
+}
