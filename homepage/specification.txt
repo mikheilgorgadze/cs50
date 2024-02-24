@@ -1,0 +1,30 @@
+html tags I used are:
+<a>
+<p>
+<main>
+<div>
+<h1>
+<h5>
+<svg>
+<nav>
+<ul>
+<li>
+<span>
+<h3>
+
+css properties I used are:
+box-sizing
+font-family
+min-height
+margin
+padding
+background-color
+color
+grid-template-columns
+gap
+cursor
+
+I used JavaScript to make expandable cards effect. When user presses (+) icon in my blog page, card will expand
+and icon will become (-). If you click it again, card collapses.
+
+I used bootstrap to create card and modal for my about page.
