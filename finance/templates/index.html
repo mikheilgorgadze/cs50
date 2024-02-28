@@ -1,0 +1,37 @@
+{%extends "layout.html" %}
+{% block title %}
+Portfolio
+{%endblock%}
+
+{%block main%}
+<table class="table table-sm table-bordered table-hover table-striped caption-top">
+    <caption>List of stocks</caption>
+    <tr>
+        <th>Stock Symbol</th>
+        <th>Stock Price</th>
+        <th>Share Count</th>
+        <th>Total Value</th>
+    </tr>
+    {% for stock in stocks%}
+    <tr>
+        <td>{{stock.stock_name}}</td>
+        <td>{{stock.single_stock_price}}</td>
+        <td>{{stock.share_count}}</td>
+        <td>{{stock.total_stock_price}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<table class="table table-sm table-bordered table-hover table-striped caption-top">
+    <caption>Balance</caption>
+    <tr>
+        <th>Current Cash:</th>
+        <th>Total Share Value:</th>
+        <th>Grand Total:</th>
+    </tr>
+    <tr>
+        <td>{{current_cash_balance}}</td>
+        <td>{{total_stocks_value}}</td>
+        <td>{{grand_total}}</td>
+    </tr>
+</table>
+{%endblock%}

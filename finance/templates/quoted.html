@@ -1,0 +1,21 @@
+{%extends "layout.html" %}
+{% block title %}
+Quote
+{%endblock%}
+
+{%block main%}
+<form action="/quote" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol"
+               placeholder="Enter a quote"
+               type="text">
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<ul class="list-group" style="margin-top:20px;">
+    <li class="list-group-item">Stock - {{quotes.symbol}}</li>
+    <li class="list-group-item">Price - {{quotes.price }}$</li>
+</ul>
+
+{%endblock%}

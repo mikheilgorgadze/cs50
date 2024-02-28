@@ -1,0 +1,26 @@
+{%extends "layout.html" %}
+{% block title %}
+History
+{%endblock%}
+
+{%block main%}
+<table class="table table-sm table-bordered table-hover table-striped caption-top">
+    <caption>History</caption>
+    <tr>
+        <th>Stock Symbol</th>
+        <th>Operation Type</th>
+        <th>Share Count</th>
+        <th>Stock Price</th>
+        <th>Transaction Time</th>
+    </tr>
+    {% for transaction in transaction_hist%}
+    <tr>
+        <td>{{transaction.stock_symbol}}</td>
+        <td>{{transaction.operation_type}}</td>
+        <td>{{transaction.single_stock_count}}</td>
+        <td>{{transaction.single_stock_price}}</td>
+        <td>{{transaction.transaction_time}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{%endblock%}

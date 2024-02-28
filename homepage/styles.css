@@ -1,7 +1,7 @@
 :root {
-    --body-bg: hsl(218, 60%, 21%);
-    --nav-bg: #EEEEEE;
-    --secondary-color: #FC6736;
+    --body-bg: #27374D;
+    --nav-bg: #526D82;
+    --secondary-color: #9DB2BF;
     --third-color: rgb(57, 62, 70);
 }
 
@@ -46,12 +46,12 @@ nav {
     list-style: none;
     display: grid;
     gap: 4rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     padding-block: 3rem;
 }
 
 .nav-list a {
-    color: var(--secondary-color);
+    color: white;
     text-decoration: none;
 }
 
@@ -94,8 +94,8 @@ nav {
 }
 
 svg {
-    width: 1rem;
-    height: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
     vertical-align: -.125rem;
     margin-right: 0.250rem;
 }

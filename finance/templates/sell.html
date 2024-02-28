@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Sell
+{% endblock %}
+
+{% block main %}
+<form action="/sell" method="post">
+    <div class="mb-3">
+        <input autocomplete="off" autofocus name="shares" placeholder="Number of stocks" type="number"
+               min="1" class="form-control mx-auto w-auto">
+    </div>
+    <div class="form-floating">
+        <select name="symbol" class="form-select mx-auto w-auto" id="floatingSelect" aria-label="Stocks to sell">
+            <option disabled selected>Choose</option>
+            {%for stock in stock_list%}
+            <option>{{stock}}</option>
+            {%endfor%}
+        </select>
+    </div>
+    <button class="btn btn-primary" type="submit" style="margin-top: 20px;">Sell</button>
+
+</form>
+{% endblock %}
